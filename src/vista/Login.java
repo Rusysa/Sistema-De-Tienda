@@ -278,12 +278,7 @@ private void Login() {
                     this.dispose();
                     System.out.println("El usuario ha iniciado sesión como Asistente");
 
-                } /*else {
-                    // Caso en el que el rol no es ni Administrador ni Asistente
-                    System.out.println("El usuario no es Administrador");
-                    JOptionPane.showMessageDialog(null, "No eres administrador");
-                }
-*/
+                } 
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario o Contraseña incorrrectos");
 
