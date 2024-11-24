@@ -55,6 +55,7 @@ public class Administrador extends javax.swing.JFrame {
         jMenuItem_reporte_producto = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jMenuItem22 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -186,6 +187,14 @@ public class Administrador extends javax.swing.JFrame {
         });
         jMenu7.add(jMenuItem22);
 
+        jMenuItem2.setText("Salir Aplicación");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem2);
+
         jMenuBar1.add(jMenu7);
 
         setJMenuBar(jMenuBar1);
@@ -232,6 +241,10 @@ public class Administrador extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem_nuevo_usuarioActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -276,6 +289,7 @@ public class Administrador extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem22;
     private javax.swing.JMenuItem jMenuItem_actualizar_producto;
     private javax.swing.JMenuItem jMenuItem_gestionar_categoria;

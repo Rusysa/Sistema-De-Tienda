@@ -53,4 +53,47 @@ public class control_categoria {
        }
        return respuesta;
     }
+     
+     
+     public boolean ModificarCategoria(Categoria objeto, int id_categoria){
+        boolean respuesta=false;
+        Connection cn = Conexion.conectar();
+        
+       try{
+           PreparedStatement consulta = cn.prepareStatement("UPDATE categoria SET descripcion=? WHERE idcategoria ='"+ id_categoria+"'");
+           consulta.setString(1,objeto.getDescripcion());
+      
+           
+           if(consulta.executeUpdate()>0){
+               respuesta=true;
+           }
+           cn.close();
+       }catch(SQLException e){
+           JOptionPane.showMessageDialog(null, "Error al Modificar Cateogoria.", "Error", JOptionPane.ERROR_MESSAGE);
+    
+       }
+       return respuesta;
+    }
+     
+     
+     
+      public boolean EliminarCategoria(int id_categoria){
+        boolean respuesta=false;
+        Connection cn = Conexion.conectar();
+        
+       try{
+           PreparedStatement consulta = cn.prepareStatement("DELETE FROM categoria WHERE idcategoria ='"+ id_categoria+"'");
+           consulta.executeUpdate();
+   
+           if(consulta.executeUpdate()>0){
+               respuesta=true;
+           }
+           cn.close();
+       }catch(SQLException e){
+           //System.out.println("Error al Eliminarr Cateogoria");
+            JOptionPane.showMessageDialog(null, "Error al eliminar Cateogoria.", "Error", JOptionPane.ERROR_MESSAGE);
+    
+       }
+       return respuesta;
+    }
 }

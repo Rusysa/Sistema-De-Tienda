@@ -13,8 +13,7 @@ public class Conexion {
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_sistema", "root", "");
             return cn;
         } catch (SQLException e) {
-            System.out.println("Error en la conexcion" + e);
-            JOptionPane.showMessageDialog(null,"Error en la Conexion ");
+             JOptionPane.showMessageDialog(null, "ERROR EN LA CONEXION.", "Error", JOptionPane.ERROR_MESSAGE);
 
         }
         return null;
