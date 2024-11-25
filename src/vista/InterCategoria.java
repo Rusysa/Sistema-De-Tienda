@@ -31,7 +31,6 @@ public class InterCategoria extends javax.swing.JInternalFrame {
         setBorder(null);
         setClosable(true);
         setIconifiable(true);
-        setResizable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Descripcion:");

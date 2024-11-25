@@ -49,7 +49,6 @@ public class Gestionar_Categoria extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setResizable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -121,12 +120,16 @@ public class Gestionar_Categoria extends javax.swing.JInternalFrame {
             Categoria categoria = new Categoria();
             control_categoria ctrCategoria = new control_categoria();
             
-            categoria.setDescripcion(jTextField1.getText().trim());
+            if(!ctrCategoria.ecategoria(jTextField1.getText().trim())){
+                categoria.setDescripcion(jTextField1.getText().trim());
                 if(ctrCategoria.ModificarCategoria(categoria, id_categoria)){
                     JOptionPane.showMessageDialog(null,"Categoria Modificada");
                     jTextField1.setText(null);
                     this.DatosCategoria();
                 }
+            }else JOptionPane.showMessageDialog(null, "Categoria Repetida", "Error", JOptionPane.ERROR_MESSAGE);
+    
+                
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione un Dato", "Error", JOptionPane.ERROR_MESSAGE);
         }
