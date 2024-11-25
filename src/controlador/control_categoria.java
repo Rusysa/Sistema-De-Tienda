@@ -30,6 +30,8 @@ public class control_categoria {
            cn.close();
        }catch(SQLException e){
            
+       }catch(NumberFormatException ne){
+            JOptionPane.showMessageDialog(null, "La descripcion no puede ser un numero", "Error", JOptionPane.ERROR_MESSAGE);
        }
        return respuesta;
     }

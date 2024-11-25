@@ -5,13 +5,14 @@ package modelo;
 public class Producto {
     
     private int IdProducto;
-    
     private String nombre;
     private int cantidad;
     private double precio;
     private String descripcion;
     private int porcentajeiva;
+    private int idcategoria;
     private int estado;
+    
     public Producto(){
         this.IdProducto=0;
         this.nombre="";
@@ -19,7 +20,27 @@ public class Producto {
         this.precio=0;
         this.descripcion="";
         this.porcentajeiva=0;
+        this.idcategoria=0;
         this.estado=0;
+    }
+
+    public Producto(int IdProducto, String nombre, int cantidad, double precio, String descripcion, int porcentajeiva, int idcategoria, int estado) {
+        this.IdProducto = IdProducto;
+        this.nombre = nombre;
+        this.cantidad = cantidad;
+        this.precio = precio;
+        this.descripcion = descripcion;
+        this.porcentajeiva = porcentajeiva;
+        this.idcategoria = idcategoria;
+        this.estado = estado;
+    }
+    
+    public int getIdcategoria() {
+        return idcategoria;
+    }
+
+    public void setIdcategoria(int idcategoria) {
+        this.idcategoria = idcategoria;
     }
 
     public int getIdProducto() {
