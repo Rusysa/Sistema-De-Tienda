@@ -128,13 +128,14 @@ public class NuevoUsuarioInter extends javax.swing.JInternalFrame {
 
         Usuario user = new Usuario();
         Ctrl_usuario ctrlUser = new Ctrl_usuario();
+       
         user.setNombre(tf_nombre.getText().trim());
         user.setApellido(tf_apellido.getText().trim());
         user.setUsuario(tf_usuario.getText().trim());
         user.setTelefono(tf_telefono.getText().trim());
         user.setPassword(tf_password.getText().trim());
         user.setRol(jComboBox2.getSelectedItem().toString());
-
+        
         if (ctrlUser.NuevoUsuario(user)) {
             tf_nombre.setText(null);
             tf_apellido.setText(null);
