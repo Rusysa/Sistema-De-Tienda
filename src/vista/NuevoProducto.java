@@ -207,6 +207,7 @@ public class NuevoProducto extends javax.swing.JInternalFrame {
 
                 if (ctrproducto.NuevoProducto(Producto)) {
                     JOptionPane.showMessageDialog(null, "Producto Añadido");
+                    this.LimpiarCampos();
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "PRODUCTO REPETIDO", "Error", JOptionPane.ERROR_MESSAGE);
@@ -233,5 +234,12 @@ public class NuevoProducto extends javax.swing.JInternalFrame {
         }
 
         return ObtenerIdCategoria;
+    }
+    
+    private void LimpiarCampos(){
+        jTextField_Nombre.setText(null);
+        jTextField_Precio.setText(null);
+        jTextFieldCantida.setText(null);
+        jTextField_Descripcion.setText(null);
     }
 }

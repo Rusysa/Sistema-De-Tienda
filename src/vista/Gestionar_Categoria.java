@@ -46,6 +46,7 @@ public class Gestionar_Categoria extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
 
         setClosable(true);
         setIconifiable(true);
@@ -53,7 +54,7 @@ public class Gestionar_Categoria extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Gestionar Categorias");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -110,44 +111,52 @@ public class Gestionar_Categoria extends javax.swing.JInternalFrame {
         jPanel3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 170, 40));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, 210, 100));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ActualizarActionPerformed
 
-        if (!jTextField1.getText().isEmpty()) {
+        if (!jTextField1.getText().trim().isEmpty()) {
+            String descripcion = jTextField1.getText().trim();
             Categoria categoria = new Categoria();
             control_categoria ctrCategoria = new control_categoria();
-            
-            if(!ctrCategoria.ecategoria(jTextField1.getText().trim())){
-                categoria.setDescripcion(jTextField1.getText().trim());
-                if(ctrCategoria.ModificarCategoria(categoria, id_categoria)){
-                    JOptionPane.showMessageDialog(null,"Categoria Modificada");
-                    jTextField1.setText(null);
-                    this.DatosCategoria();
+
+            try {
+                if (!ctrCategoria.ecategoria(descripcion)) {
+                    categoria.setDescripcion(descripcion);
+                    if (ctrCategoria.ModificarCategoria(categoria, id_categoria)) {
+                        JOptionPane.showMessageDialog(null, "Categoría modificada correctamente.");
+                        jTextField1.setText(null);
+                        this.DatosCategoria();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error al modificar la categoría.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "La categoría ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-            }else JOptionPane.showMessageDialog(null, "Categoria Repetida", "Error", JOptionPane.ERROR_MESSAGE);
-    
-                
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Ocurrió un error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Seleccione un Dato", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe ingresar una descripción.", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
 
     }//GEN-LAST:event_jButton_ActualizarActionPerformed
 
     private void jButton_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EliminarActionPerformed
-         if (!jTextField1.getText().isEmpty()) {
+        if (!jTextField1.getText().isEmpty()) {
             Categoria categoria = new Categoria();
             control_categoria ctrCategoria = new control_categoria();
-            
-            categoria.setDescripcion(jTextField1.getText().trim());
-                if(!ctrCategoria.EliminarCategoria(id_categoria)){
-                    JOptionPane.showMessageDialog(null,"Categoria Eliminada");
-                    jTextField1.setText(null);
-                    this.DatosCategoria();
-                }
+
+            //categoria.setDescripcion(jTextField1.getText().trim());
+            if (!ctrCategoria.EliminarCategoria(id_categoria)) {
+                JOptionPane.showMessageDialog(null, "Categoria Eliminada");
+                jTextField1.setText(null);
+                this.DatosCategoria();
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione un dato", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -163,8 +172,9 @@ public class Gestionar_Categoria extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    public static javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTable jTable_Categorias;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable_Categorias;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
@@ -176,9 +186,9 @@ public class Gestionar_Categoria extends javax.swing.JInternalFrame {
         try {
             st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
-            Gestionar_Categoria.jTable_Categorias = new JTable(model);
+            this.jTable_Categorias = new JTable(model);
 
-            Gestionar_Categoria.jScrollPane1.setViewportView(Gestionar_Categoria.jTable_Categorias);
+            this.jScrollPane1.setViewportView(this.jTable_Categorias);
             model.addColumn("idCategoria");
             model.addColumn("Descripcion");
             model.addColumn("Estado");

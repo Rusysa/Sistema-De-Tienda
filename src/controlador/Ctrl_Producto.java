@@ -57,5 +57,70 @@ public class Ctrl_Producto {
         }
         return respuesta;
     }
+    
+    public boolean ModificarProducto(Producto objeto, int idProducto){
+        boolean respuesta=false;
+        Connection cn = Conexion.conectar();
+        
+       try{
+           PreparedStatement consulta = cn.prepareStatement("UPDATE producto SET nombre=?, cantidad=?, precio=?, descripcion=?, fk_idcategoria=?  WHERE idproducto ='"+ idProducto+"'");
+           consulta.setString(1,objeto.getNombre());
+           consulta.setInt(2,objeto.getCantidad());
+           consulta.setDouble(3,objeto.getPrecio());
+           consulta.setString(4,objeto.getDescripcion());
+           consulta.setInt(5,objeto.getIdcategoria());
+    
+           if(consulta.executeUpdate()>0){
+               respuesta=true;
+           }
+           cn.close();
+       }catch(SQLException e){
+           JOptionPane.showMessageDialog(null, "Error al Modificar Producto.", "Error", JOptionPane.ERROR_MESSAGE);
+    
+       }
+       return respuesta;
+    }
+     
+    
+    public boolean ModificarStock(Producto objeto, int idProducto){
+        boolean respuesta=false;
+        Connection cn = Conexion.conectar();
+        
+       try{
+           PreparedStatement consulta = cn.prepareStatement("UPDATE producto SET cantidad=? WHERE idproducto ='"+ idProducto+"'");
+           consulta.setInt(1,objeto.getCantidad());
+     
+           if(consulta.executeUpdate()>0){
+               respuesta=true;
+           }
+           cn.close();
+       }catch(SQLException e){
+           JOptionPane.showMessageDialog(null, "Error al Modificar Producto.", "Error", JOptionPane.ERROR_MESSAGE);
+    
+       }
+       return respuesta;
+    }
+     
+     
+      public boolean EliminarCategoria(int idProducto){
+        boolean respuesta=false;
+        Connection cn = Conexion.conectar();
+        
+       try{
+           PreparedStatement consulta = cn.prepareStatement("DELETE FROM producto WHERE idproducto ='"+ idProducto+"'");
+           consulta.executeUpdate();
+   
+           if(consulta.executeUpdate()>0){
+               respuesta=true;
+           }
+           cn.close();
+       }catch(SQLException e){
+           //System.out.println("Error al Eliminarr Cateogoria");
+            JOptionPane.showMessageDialog(null, "Error al eliminar Producto.", "Error", JOptionPane.ERROR_MESSAGE);
+    
+       }
+       return respuesta;
+    }
+    
 
 }

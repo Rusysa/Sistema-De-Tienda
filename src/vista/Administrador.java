@@ -113,10 +113,20 @@ public class Administrador extends javax.swing.JFrame {
 
         jMenuItem_gestionar_producto.setText("Gestionar Producto");
         jMenuItem_gestionar_producto.setPreferredSize(new java.awt.Dimension(150, 30));
+        jMenuItem_gestionar_producto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_gestionar_productoActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem_gestionar_producto);
 
         jMenuItem_actualizar_producto.setText("Actualizar Stock");
         jMenuItem_actualizar_producto.setPreferredSize(new java.awt.Dimension(150, 30));
+        jMenuItem_actualizar_producto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_actualizar_productoActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem_actualizar_producto);
 
         jMenuBar1.add(jMenu2);
@@ -306,8 +316,22 @@ public class Administrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem_gestionar_cliente1ActionPerformed
 
     private void jMenuItem_gestionar_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_gestionar_usuarioActionPerformed
-        // TODO add your handling code here:
+        GestionarUsuario Gusuario = new GestionarUsuario();
+        jDesktopPane_admin.add(Gusuario);
+        Gusuario.setVisible(true);
     }//GEN-LAST:event_jMenuItem_gestionar_usuarioActionPerformed
+
+    private void jMenuItem_gestionar_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_gestionar_productoActionPerformed
+       Gestionar_Producto Gproducto= new Gestionar_Producto();
+       jDesktopPane_admin.add(Gproducto);
+       Gproducto.setVisible(true);
+    }//GEN-LAST:event_jMenuItem_gestionar_productoActionPerformed
+
+    private void jMenuItem_actualizar_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_actualizar_productoActionPerformed
+        Actualiza_Stock Astock = new Actualiza_Stock();
+        jDesktopPane_admin.add(Astock);
+        Astock.setVisible(true);
+    }//GEN-LAST:event_jMenuItem_actualizar_productoActionPerformed
 
     /**
      * @param args the command line arguments

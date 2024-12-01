@@ -38,7 +38,7 @@ public class control_categoria {
     
      public boolean ecategoria(String categoria){
         boolean respuesta=false;
-         String Sql= "SELECT descripcion FROM categoria WHERE descripcion ='" + categoria +"';";
+         String Sql= "SELECT descripcion FROM categoria WHERE descripcion ='" + categoria +"'";
          Statement st;
        
        
@@ -93,7 +93,7 @@ public class control_categoria {
            cn.close();
        }catch(SQLException e){
            //System.out.println("Error al Eliminarr Cateogoria");
-            JOptionPane.showMessageDialog(null, "Error al eliminar Cateogoria.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al eliminar Categoria.", "Error", JOptionPane.ERROR_MESSAGE);
     
        }
        return respuesta;
