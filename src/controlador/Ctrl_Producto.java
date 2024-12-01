@@ -17,22 +17,24 @@ public class Ctrl_Producto {
         Connection cn = Conexion.conectar();
 
         try {
-            PreparedStatement consulta = cn.prepareStatement("INSERT INTO producto VALUES(?,?,?,?,?,?,?,?)");
+            PreparedStatement consulta = cn.prepareStatement("INSERT INTO producto VALUES(?,?,?,?,?,?,?)");
             consulta.setInt(1, 0);
             consulta.setString(2, objeto.getNombre());
             consulta.setInt(3, objeto.getCantidad());
             consulta.setDouble(4, objeto.getPrecio());
             consulta.setString(5, objeto.getDescripcion());
-            consulta.setInt(6, objeto.getPorcentajeiva());
-            consulta.setInt(7, objeto.getIdcategoria());
-            consulta.setInt(8,1);
+            consulta.setInt(6, objeto.getIdcategoria());
+            consulta.setInt(7,1);
 
             if (consulta.executeUpdate() > 0) {
                 respuesta = true;
             }
             cn.close();
-        } catch (SQLException e) {
-             JOptionPane.showMessageDialog(null, "Error al Guardar Producto", "Error", JOptionPane.ERROR_MESSAGE);
+        }catch(NumberFormatException ne){
+            JOptionPane.showMessageDialog(null, "Error formato", "Error", JOptionPane.ERROR_MESSAGE);
+        } 
+        catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al Guardar Producto", "Error", JOptionPane.ERROR_MESSAGE);
         }
         return respuesta;
     }

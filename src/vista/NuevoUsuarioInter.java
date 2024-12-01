@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import modelo.Usuario;
 import controlador.Ctrl_usuario;
 import javax.swing.JOptionPane;
+import java.sql.SQLException;
+
 public class NuevoUsuarioInter extends javax.swing.JInternalFrame {
 
     public NuevoUsuarioInter() {
@@ -15,7 +17,6 @@ public class NuevoUsuarioInter extends javax.swing.JInternalFrame {
         int alto = (screenSize.height - this.getHeight()) / 2;
         this.setLocation(ancho, alto);
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -113,17 +114,27 @@ public class NuevoUsuarioInter extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     public void NuevoUsuario() {
+
+        if (tf_nombre.getText().trim().isEmpty()
+                || tf_apellido.getText().trim().isEmpty()
+                || tf_usuario.getText().trim().isEmpty()
+                || tf_telefono.getText().trim().isEmpty()
+                || tf_password.getText().trim().isEmpty()
+                || jComboBox2.getSelectedItem() == null) {
+
+            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return; // Detener la ejecución si hay campos vacíos
+        }
+
         Usuario user = new Usuario();
         Ctrl_usuario ctrlUser = new Ctrl_usuario();
-      
-  
         user.setNombre(tf_nombre.getText().trim());
         user.setApellido(tf_apellido.getText().trim());
         user.setUsuario(tf_usuario.getText().trim());
         user.setTelefono(tf_telefono.getText().trim());
         user.setPassword(tf_password.getText().trim());
         user.setRol(jComboBox2.getSelectedItem().toString());
-       
+
         if (ctrlUser.NuevoUsuario(user)) {
             tf_nombre.setText(null);
             tf_apellido.setText(null);
@@ -131,14 +142,12 @@ public class NuevoUsuarioInter extends javax.swing.JInternalFrame {
             tf_telefono.setText(null);
             tf_password.setText(null);
             JOptionPane.showMessageDialog(null, "Usuario Añadido");
-            
-            
+
         } else {
-            JOptionPane.showMessageDialog(null, "Error al añadir Cliente");
+            JOptionPane.showMessageDialog(null, "Error al añadir producto", "Error", JOptionPane.ERROR_MESSAGE);
 
         }
-        
-        
+
     }
 
 }

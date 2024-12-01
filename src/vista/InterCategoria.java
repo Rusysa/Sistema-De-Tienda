@@ -93,7 +93,7 @@ public void LlenarCategoria(){
                 }
                 
             } else {
-                JOptionPane.showMessageDialog(null, "Categoria repetida");
+                JOptionPane.showMessageDialog(null, "CATEOGORIA REPETIDA", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
         descripcion_categoria.setText("");
