@@ -1,6 +1,5 @@
 package vista;
 
-
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
@@ -18,7 +17,7 @@ import modelo.Usuario;
 public class GestionarUsuario extends javax.swing.JInternalFrame {
 
     int idusuario;
-    
+
     public GestionarUsuario() {
         initComponents();
         this.setSize(new Dimension(800, 400));
@@ -27,7 +26,7 @@ public class GestionarUsuario extends javax.swing.JInternalFrame {
         int alto = (screenSize.height - this.getHeight()) / 2;
         this.setLocation(ancho, alto);
         this.CargarDatosEnTabla();
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -73,7 +72,7 @@ public class GestionarUsuario extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable_Usuario);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 460, 190));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 470, 190));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Rol:");
@@ -110,10 +109,15 @@ public class GestionarUsuario extends javax.swing.JInternalFrame {
         jPanel1.add(jTextField_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 220, 190, 30));
 
         jComboBox_rol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Asistente" }));
-        jPanel1.add(jComboBox_rol, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 312, 190, 40));
+        jPanel1.add(jComboBox_rol, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 310, 190, 40));
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setText("Eliminar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 280, 120, 50));
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -131,42 +135,70 @@ public class GestionarUsuario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      this.ModificarUsuario();
+        this.ModificarUsuario();
     }//GEN-LAST:event_jButton2ActionPerformed
-    private void ModificarUsuario(){
-        Usuario user = new Usuario();
-        Ctrl_usuario ctrlUser = new Ctrl_usuario();
-        
-        if(jTextField_nombre.getText().trim().isEmpty()
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.EliminarUsuario();
+    }//GEN-LAST:event_jButton1ActionPerformed
+    private void EliminarUsuario() {
+        if (jTextField_nombre.getText().trim().isEmpty()
                 || jTextField_apellido.getText().trim().isEmpty()
                 || jTextField_usuario.getText().trim().isEmpty()
                 || jTextField_telefono.getText().trim().isEmpty()
                 || jTextField_telefono.getText().trim().isEmpty()
-                || jTextField_contraseña.getText().trim().isEmpty()){
-             JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-             return;
+                || jTextField_contraseña.getText().trim().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "Seleccione un Dato de la tabla.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
         }
-        
-       
-            if (!ctrlUser.ComprobarRegistro(jTextField_usuario.getText().trim())) {
-                user.setNombre(jTextField_nombre.getText().trim());
-                user.setApellido(jTextField_apellido.getText().trim());
-                user.setUsuario(jTextField_usuario.getText().trim());
-                user.setTelefono(jTextField_telefono.getText().trim());
-                user.setPassword(jTextField_contraseña.getText().trim());
-                String rol=jComboBox_rol.getSelectedItem().toString();
-                user.setRol(rol);
-                if (ctrlUser.ModificarUsuario(user, idusuario)) {
-                    JOptionPane.showMessageDialog(null, "Usuario Modificado");
-                    this.LimpiarCampos();
-                    this.CargarDatosEnTabla();
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Usuario REPETIDO", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+
+        Usuario user = new Usuario();
+        Ctrl_usuario ctrlUser = new Ctrl_usuario();
+
+        //categoria.setDescripcion(jTextField1.getText().trim());
+        if (!ctrlUser.EliminarUsuario(idusuario)) {
+            JOptionPane.showMessageDialog(null, "Usuario Eliminado");
+
+            this.LimpiarCampos();
+            this.CargarDatosEnTabla();
+        }
+
     }
 
-    private void LimpiarCampos(){
+    private void ModificarUsuario() {
+        Usuario user = new Usuario();
+        Ctrl_usuario ctrlUser = new Ctrl_usuario();
+
+        if (jTextField_nombre.getText().trim().isEmpty()
+                || jTextField_apellido.getText().trim().isEmpty()
+                || jTextField_usuario.getText().trim().isEmpty()
+                || jTextField_telefono.getText().trim().isEmpty()
+                || jTextField_telefono.getText().trim().isEmpty()
+                || jTextField_contraseña.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (!ctrlUser.ComprobarRegistro(jTextField_usuario.getText().trim())) {
+            user.setNombre(jTextField_nombre.getText().trim());
+            user.setApellido(jTextField_apellido.getText().trim());
+            user.setUsuario(jTextField_usuario.getText().trim());
+            user.setTelefono(jTextField_telefono.getText().trim());
+            user.setPassword(jTextField_contraseña.getText().trim());
+            String rol = jComboBox_rol.getSelectedItem().toString();
+            user.setRol(rol);
+            if (ctrlUser.ModificarUsuario(user, idusuario)) {
+                JOptionPane.showMessageDialog(null, "Usuario Modificado");
+                this.LimpiarCampos();
+                this.CargarDatosEnTabla();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Usuario REPETIDO", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void LimpiarCampos() {
         jTextField_nombre.setText(null);
         jTextField_apellido.setText(null);
         jTextField_usuario.setText(null);
@@ -212,8 +244,8 @@ public class GestionarUsuario extends javax.swing.JInternalFrame {
             modelTabla.addColumn("Telefono");
             modelTabla.addColumn("Contraseña");
             modelTabla.addColumn("Rol");
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 Object fila[] = new Object[7];
                 for (int i = 0; i < 7; i++) {
                     fila[i] = rs.getObject(i + 1);
@@ -222,9 +254,9 @@ public class GestionarUsuario extends javax.swing.JInternalFrame {
             }
             cn.close();
         } catch (SQLException e) {
-            System.out.println("Error al Cargar los datos en la tabla de usuarios"+e);
+            System.out.println("Error al Cargar los datos en la tabla de usuarios" + e);
         }
-        
+
         jTable_Usuario.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -238,26 +270,26 @@ public class GestionarUsuario extends javax.swing.JInternalFrame {
         });
 
     }
-    
-    private void EnviarDatosProductoACampos(int idusuario){
-        Connection cn= Conexion.conectar();
+
+    private void EnviarDatosProductoACampos(int idusuario) {
+        Connection cn = Conexion.conectar();
         Statement st;
-        String sql="SELECT * FROM usuario WHERE idusuario='"+idusuario+"'";
+        String sql = "SELECT * FROM usuario WHERE idusuario='" + idusuario + "'";
         try {
-            st=cn.createStatement();
-            ResultSet rs=st.executeQuery(sql);
-            if(rs.next()){
-            jTextField_nombre.setText(rs.getString("nombre"));
-            jTextField_apellido.setText(rs.getString("apellido"));
-            jTextField_usuario.setText(rs.getString("usuario"));
-            jTextField_telefono.setText(rs.getString("telefono"));
-            jTextField_contraseña.setText(rs.getString("password"));
-            String rol = rs.getString("rol");
-            jComboBox_rol.setSelectedItem(rol);
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if (rs.next()) {
+                jTextField_nombre.setText(rs.getString("nombre"));
+                jTextField_apellido.setText(rs.getString("apellido"));
+                jTextField_usuario.setText(rs.getString("usuario"));
+                jTextField_telefono.setText(rs.getString("telefono"));
+                jTextField_contraseña.setText(rs.getString("password"));
+                String rol = rs.getString("rol");
+                jComboBox_rol.setSelectedItem(rol);
             }
-            
+
         } catch (SQLException e) {
-            System.out.println("Error al llenar los campos con los datos de la tabla"+e);
+            System.out.println("Error al llenar los campos con los datos de la tabla" + e);
         }
     }
 }

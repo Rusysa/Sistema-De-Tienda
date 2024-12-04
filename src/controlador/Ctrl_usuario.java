@@ -120,4 +120,24 @@ public class Ctrl_usuario {
         }
         return respuesta;
     }
+    
+    public boolean EliminarUsuario(int idusuario){
+        boolean respuesta=false;
+        Connection cn = Conexion.conectar();
+        
+       try{
+           PreparedStatement consulta = cn.prepareStatement("DELETE FROM usuario WHERE idusuario ='"+ idusuario+"'");
+           consulta.executeUpdate();
+   
+           if(consulta.executeUpdate()>0){
+               respuesta=true;
+           }
+           cn.close();
+       }catch(SQLException e){
+           //System.out.println("Error al Eliminarr Cateogoria");
+            JOptionPane.showMessageDialog(null, "Error al eliminar Producto.", "Error", JOptionPane.ERROR_MESSAGE);
+    
+       }
+       return respuesta;
+    }
 }

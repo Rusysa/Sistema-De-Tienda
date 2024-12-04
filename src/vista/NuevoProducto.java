@@ -73,6 +73,12 @@ public class NuevoProducto extends javax.swing.JInternalFrame {
             }
         });
 
+        jTextField_Descripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField_DescripcionKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -146,6 +152,12 @@ public class NuevoProducto extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField_DescripcionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_DescripcionKeyPressed
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            this.LlenarNuevoProducto();
+        }
+    }//GEN-LAST:event_jTextField_DescripcionKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
